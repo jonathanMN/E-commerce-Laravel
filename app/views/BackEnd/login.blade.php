@@ -1,1 +1,15 @@
-{{ 'login' }}
+@extends('layout.administrator.login-layout')
+
+@section('content')
+
+	<form class="form-signin">
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<input type="text" class="form-control" placeholder="Email address" autofocus>
+		<input type="password" class="form-control" placeholder="Password">
+		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	</form>
+
+@stop()

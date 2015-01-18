@@ -17,5 +17,11 @@ Route::get('/', function()
 });
 
 Route::get('site-admin', array(
-	'uses'	=> 'StieAdmin/LoginController@loginPage'
+	'as'	=> 'site-admin',
+	'uses'	=> 'LoginController@loginPage'
+));
+
+Route::get('add-users', array(
+	'as' 	=> 'add-users',
+	'uses'	=> 'BackendController@addUsers'
 ));
