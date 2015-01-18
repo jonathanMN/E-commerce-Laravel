@@ -1,10 +1,10 @@
 <?php
 
-class HomeController extends BaseController {
+class LoginController extends BaseController {
 
-	public function showWelcome()
+	public function loginPage()
 	{
-		return View::make('hello');
+		return View::make('BackEnd.login');
 	}
 
 }

@@ -17,5 +17,5 @@ Route::get('/', function()
 });
 
 Route::get('site-admin', array(
-	'uses'	=> 'HomeController@showWelcome'
+	'uses'	=> 'StieAdmin/LoginController@loginPage'
 ));
