@@ -14,24 +14,24 @@
 				<li class="active"><a href="#">Home</a></li>
 				<li><a href="#about">About</a></li>
 				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					@if(Auth::check())
+						Hello, {{ Auth::user()->username }}
+					@endif
+					<b class="caret"></b>
+					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a href="#">Account</a></li>
 						<li class="divider"></li>
-						<li class="dropdown-header">Nav header</li>
-						<li><a href="#">Separated link</a></li>
-						<li><a href="{{ URL::route('sign-out') }}">Logout</a></li>
+						<li><a href="{{ URL::route('sign-out') }}">Sign Out</a></li>
 					</ul>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../navbar/">Default</a></li>
-				<li><a href="../navbar-static-top/">Static top</a></li>
-				<li class="active"><a href="./">Fixed top</a></li>
-			</ul>
+
 		</div><!--/.nav-collapse -->
 	</div><!-- /.container -->
 </div><!-- /.navbar -->
