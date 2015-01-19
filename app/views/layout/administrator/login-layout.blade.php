@@ -21,18 +21,24 @@
 
 	<div class="container">
 
+		@yield('content')
+
 		@if(Session::has('message'))
-			<div class="alert alert-info">
+			<div class="alert alert-info col-md form-signin">
 				{{ Session::get('message') }}
 			</div>
 		@endif
 
-		@yield('content')
+		@if(Session::has('error-message'))
+			<div class="alert alert-danger form-signin">
+				{{ Session::get('error-message') }}
+			</div>
+		@endif
 
 	</div><!-- /.container -->
 
 	{{ HTML::script('js/jquery-1.10.2.js') }}
-	{{ HTML::script('js/bootstrap.js') }}
+	{{ HTML::script('js/bootstrap.min.js') }}
 
 </body>
 </html>
