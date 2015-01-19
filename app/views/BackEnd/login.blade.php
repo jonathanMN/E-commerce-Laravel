@@ -1,6 +1,11 @@
 @extends('layout.administrator.login-layout')
 
 @section('content')
+
+	@if(Auth::check())
+		{{ '' }}
+	@endif
+
 	{{ Form::open(array('url' => URL::route('user-sign-in'), 'method' => 'post', 'class' => 'form-signin')) }}
 		<h2 class="form-signin-heading">Please sign in</h2>
 		<input type="text" class="form-control" name="username" placeholder="Username .." value="{{{ (Input::old('username')) ? Input::old('username') : '' }}}" autofocus>
