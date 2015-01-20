@@ -17,6 +17,14 @@ Route::get('/', function()
 });
 
 /**
+ * Sign in page
+ */
+Route::get('site-admin', array(
+	'as'	=> 'admin-login',
+	'uses'	=> 'LoginController@loginPage'
+));
+
+/**
  * Authenticated group
  */
 Route::group(array('before' => 'auth'), function(){
@@ -73,13 +81,5 @@ Route::group(array('before' => 'guest'), function(){
 		));
 
 	});
-
-	/**
-	 * Sign in page
-	 */
-	Route::get('site-admin', array(
-		'as'	=> 'admin-login',
-		'uses'	=> 'LoginController@loginPage'
-	));
 
 });
