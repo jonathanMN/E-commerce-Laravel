@@ -3,7 +3,7 @@
 @section('content')
 
 	@if(Auth::check())
-		{{ '' }}
+		{{ Redirect::route('add-users') }}
 	@endif
 
 	{{ Form::open(array('url' => URL::route('user-sign-in'), 'method' => 'post', 'class' => 'form-signin')) }}
