@@ -11,9 +11,16 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li class="active"><a href="#">Dashboard</a></li>
+				<li><a href="#about">Accounts</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Add New Product</a></li>
+						<li><a href="#">Categories</a></li>
+						<li><a href="#">Brands</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
