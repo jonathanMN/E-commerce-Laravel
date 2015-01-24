@@ -12,7 +12,13 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Dashboard</a></li>
-				<li><a href="#about">Accounts</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Add New User</a></li>
+						<li><a href="#">User Accounts</a></li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
 					<ul class="dropdown-menu">

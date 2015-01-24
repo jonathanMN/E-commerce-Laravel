@@ -39,7 +39,7 @@ Route::group(array('before' => 'auth'), function(){
 		*/
 		Route::post('/site-admin/add-users/create', array(
 			'as' 	=> 'account-create-post',
-			'uses' 	=> 'BackendController@userCreate'
+			'uses' 	=> 'AdminController@userCreate'
 		));
 	});
 
@@ -48,7 +48,7 @@ Route::group(array('before' => 'auth'), function(){
 	 */
 	Route::get('/site-admin/add-users', array(
 		'as' 	=> 'add-users',
-		'uses'	=> 'BackendController@addUsers'
+		'uses'	=> 'AdminController@addUsers'
 	));
 
 	/**
@@ -56,7 +56,7 @@ Route::group(array('before' => 'auth'), function(){
 	 */
 	Route::get('/site-admin/sign-out', array(
 		'as' 	=> 'sign-out',
-		'uses' 	=> 'BackendController@userSignout'
+		'uses' 	=> 'AdminController@userSignout'
 	));
 
 });
@@ -77,7 +77,7 @@ Route::group(array('before' => 'guest'), function(){
 		 */
 		Route::post('/site-admin/sign-in', array(
 			'as' 	=> 'user-sign-in',
-			'uses'	=> 'BackendController@userSignin'
+			'uses'	=> 'AdminController@userSignin'
 		));
 
 	});
