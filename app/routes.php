@@ -16,70 +16,73 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-/**
- * Sign in page
- */
-Route::get('site-admin', array(
-	'as'	=> 'admin-login',
-	'uses'	=> 'LoginController@loginPage'
-));
-
-/**
- * Authenticated group
- */
-Route::group(array('before' => 'auth'), function(){
-
+Route::group(array('prefix' => 'site-admin'), function(){
+	
 	/**
-	 * cross-site request forgery (CSRF) protection group
+	 * Sign in page
 	 */
-	Route::group(array('before' => 'csrf'), function(){
-
-		/**
-		* Create New User (POST)
-		*/
-		Route::post('/site-admin/add-users/create', array(
-			'as' 	=> 'account-create-post',
-			'uses' 	=> 'AdminController@userCreate'
-		));
-	});
-
-	/**
-	 * Create new User Page
-	 */
-	Route::get('/site-admin/add-users', array(
-		'as' 	=> 'add-users',
-		'uses'	=> 'AdminController@addUsers'
+	Route::get('/', array(
+		'as'	=> 'admin-login',
+		'uses'	=> 'LoginController@loginPage'
 	));
 
 	/**
-	 * Sign Out
+	 * Authenticated group
 	 */
-	Route::get('/site-admin/sign-out', array(
-		'as' 	=> 'sign-out',
-		'uses' 	=> 'AdminController@userSignout'
-	));
-
-});
-
-
-/**
- * Unauthenticated group
- */
-Route::group(array('before' => 'guest'), function(){
-
-	/**
-	 * cross-site request forgery (CSRF) protection group
-	 */
-	Route::group(array('before' => 'csrf'), function(){
+	Route::group(array('before' => 'auth'), function(){
 
 		/**
-		 * Sign in (POST)
+		 * cross-site request forgery (CSRF) protection group
 		 */
-		Route::post('/site-admin/sign-in', array(
-			'as' 	=> 'user-sign-in',
-			'uses'	=> 'AdminController@userSignin'
+		Route::group(array('before' => 'csrf'), function(){
+
+			/**
+			* Create New User (POST)
+			*/
+			Route::post('add-users/create', array(
+				'as' 	=> 'account-create-post',
+				'uses' 	=> 'AdminController@userCreate'
+			));
+		});
+
+		/**
+		 * Create new User Page
+		 */
+		Route::get('add-users', array(
+			'as' 	=> 'add-users',
+			'uses'	=> 'AdminController@addUsers'
+		));
+
+		/**
+		 * Sign Out
+		 */
+		Route::get('sign-out', array(
+			'as' 	=> 'sign-out',
+			'uses' 	=> 'AdminController@userSignout'
 		));
 
 	});
 
-});
+	/**
+	 * Unauthenticated group
+	 */
+	Route::group(array('before' => 'guest'), function(){
+
+		/**
+		 * cross-site request forgery (CSRF) protection group
+		 */
+		Route::group(array('before' => 'csrf'), function(){
+
+			/**
+			 * Sign in (POST)
+			 */
+			Route::post('sign-in', array(
+				'as' 	=> 'user-sign-in',
+				'uses'	=> 'LoginController@userSignin'
+			));
+
+		});
+
+	});
+
+}); /* <-- site-admin */
