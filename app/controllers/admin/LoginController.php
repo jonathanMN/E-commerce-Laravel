@@ -31,7 +31,7 @@ class LoginController extends BaseController {
 
 			if ($auth)
 			{
-				return Redirect::route('add-users');
+				return Redirect::route('dboard');
 			}
 			else
 			{

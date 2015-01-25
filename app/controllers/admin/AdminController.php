@@ -2,9 +2,34 @@
 
 class AdminController extends BaseController {
 
+	public function dashboard()
+	{
+		return View::make('admin.dashboard');
+	}
+
 	public function addUsers()
 	{
-		return View::make('admin.add-users');
+		return View::make('admin.users.add-users');
+	}
+
+	public function users()
+	{
+		return View::make('admin.users.list-users');
+	}
+
+	public function products()
+	{
+		return View::make('admin.products.list-products');
+	}
+
+	public function categories()
+	{
+		return View::make('admin.categories.list-categories');
+	}
+
+	public function brands()
+	{
+		return View::make('admin.brands.list-brands');
 	}
 
 	public function userSignout()

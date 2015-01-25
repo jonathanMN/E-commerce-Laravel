@@ -10,6 +10,9 @@
     <!-- Custom styles for this template -->
     {{ HTML::style('css/navbar-fixed-top.css') }}
 
+    <!-- Font Awesome Icons -->
+    {{ HTML::style('css/font-awesome.min.css') }}
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 	    {{ HTML::script('js/html5shiv.js') }}

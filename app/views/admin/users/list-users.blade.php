@@ -1,6 +1,6 @@
 @extends('layout.administrator.default')
 
 @section('content')
-	{{ 'Dashboard' }}
+	{{ 'List of Users' }}
 
 @stop()
