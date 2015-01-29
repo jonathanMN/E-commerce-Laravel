@@ -20,6 +20,7 @@ class Products extends Migration {
 			$table->text('description');
 			$table->string('image');
 			$table->integer('quantity');
+			$table->decimal('unit_cost', 11, 2);
 			$table->timestamps();
 		});
 	}
