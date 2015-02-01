@@ -22,11 +22,6 @@ class AdminController extends BaseController {
 		return View::make('admin.products.list-products');
 	}
 
-	public function categories()
-	{
-		return View::make('admin.categories.list-categories');
-	}
-
 	public function brands()
 	{
 		return View::make('admin.brands.list-brands');
