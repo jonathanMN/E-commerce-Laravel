@@ -26,7 +26,7 @@
 		@include('layout.administrator.navigation')
 
 		@if(Session::has('message'))
-			<div class="alert alert-info">
+			<div class="alert alert-success">
 				{{ Session::get('message') }}
 			</div>
 		@endif
@@ -43,6 +43,8 @@
 
 	{{ HTML::script('js/jquery-1.10.2.js') }}
 	{{ HTML::script('js/bootstrap.min.js') }}
+
+	@yield('page_scripts')
 
 </body>
 </html>
