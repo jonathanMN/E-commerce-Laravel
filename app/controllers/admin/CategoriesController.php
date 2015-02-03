@@ -40,4 +40,27 @@ class CategoriesController extends BaseController
 				->with('message', 'Category Successfully Updated');
 	}
 
+	public function deleteCategory1($id)
+	{
+		$cat = Category::find($id);
+		$cat->delete();
+		return 	Redirect::route('list-categories')
+				->with('message', 'Category Deleted');
+	}
+
+	public function deleteCategory2()
+	{
+		$id = Input::get('catids');
+
+		$loop = count($id) - 1;
+		for ($i = 0; $i <= $loop; $i++)
+		{
+			$cat = Category::find($id[$i]);
+			$cat->delete();
+			if ($cat && $i == $loop)
+				return 	Redirect::route('list-categories')
+						->with('message', 'Record/s Deleted');
+		}
+	}
+
 }

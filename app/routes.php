@@ -69,13 +69,21 @@ Route::group(array('prefix' => 'site-admin'), function(){
 				'uses'	=> 'CategoriesController@categories'
 			));
 
+			// View selected category in modal
 			Route::get('view/{id}', array(
 				'as' 	=> 'cat-id',
 				'uses' 	=> 'CategoriesController@viewEdit'
 			));
 
+			// Delete Category
+			Route::get('delete/{id}', array(
+				'as' 	=> 'delete-single',
+				'uses' 	=> 'CategoriesController@deleteCategory1'
+			));
+
 			// cross-site request forgery (CSRF) protection group
 			Route::group(array('before' => 'csrf'), function(){
+
 				// Add Category
 				Route::post('create', array(
 					'as'	=> 'create-category',
@@ -86,6 +94,12 @@ Route::group(array('prefix' => 'site-admin'), function(){
 				Route::post('update', array(
 					'as' 	=> 'update-category',
 					'uses' 	=> 'CategoriesController@updateCategory'
+				));
+
+				// Multiple Delete
+				Route::post('multi-delete', array(
+					'as' 	=> 'delete-multi',
+					'uses' 	=> 'CategoriesController@deleteCategory2'
 				));
 			});
 		});
