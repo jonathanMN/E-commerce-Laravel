@@ -15,6 +15,7 @@ class Categories extends Migration {
 		Schema::create('categories', function($table){
 			$table->increments('id');
 			$table->string('category');
+			$table->integer('main_category');
 			$table->timestamps();
 		});
 	}
