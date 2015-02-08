@@ -17,16 +17,6 @@ class AdminController extends BaseController {
 		return View::make('admin.users.list-users');
 	}
 
-	public function products()
-	{
-		return View::make('admin.products.list-products');
-	}
-
-	public function brands()
-	{
-		return View::make('admin.brands.list-brands');
-	}
-
 	public function userSignout()
 	{
 		Auth::logout();

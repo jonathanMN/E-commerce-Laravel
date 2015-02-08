@@ -96,30 +96,72 @@ Route::group(array('prefix' => 'site-admin'), function(){
 					'uses' 	=> 'CategoriesController@updateCategory'
 				));
 
-				// Multiple Delete
+				// Multiple Delete Categories
 				Route::post('multi-delete', array(
 					'as' 	=> 'delete-multi',
 					'uses' 	=> 'CategoriesController@deleteCategory2'
 				));
 			});
 		});
-		
+
+		/**
+		 * FOR BRANDS
+		 */
+		Route::group(array('prefix' => 'brands'), function(){
+			// List of Brands
+			Route::get('/', array(
+				'as' 	=> 'list-brands',
+				'uses'	=> 'BrandsController@brands'
+			));
+
+			// View Selected in modal
+			Route::get('view/{id}', array(
+				'as' 	=> 'brand-id',
+				'uses'	=> 'BrandsController@viewBrand'
+			));
+
+			// Delete Brand
+			Route::get('delete/{id}', array(
+				'as' 	=> 'delete-single-brand',
+				'uses'	=> 'BrandsController@deleteBrand1'
+			));
+
+			Route::group(array('before' => 'csrf'), function(){
+				// Add Brands
+				Route::post('create', array(
+					'as' 	=> 'create-brand',
+					'uses'	=> 'BrandsController@newBrand'
+				));
+
+				// Update Brand
+				Route::post('update', array(
+					'as' 	=> 'update-brand',
+					'uses' 	=> 'BrandsController@updateBrand'
+				));
+
+				// Multiple Delete Brand
+				Route::post('multi-delete', array(
+					'as' 	=> 'multi-delete-brand',
+					'uses'	=> 'BrandsController@deleteBrand2'
+				));
+			});
+		});
+
+		/**
+		 * FOR PRODUCTS
+		 */
+		Route::group(array('prefix' => 'products'), function(){
+			// List of Products
+			Route::get('/', array(
+				'as' 	=> 'list-products',
+				'uses'	=> 'ProductsController@products'
+			));
+		});
+
 		// Dashboard
 		Route::get('dashboard', array(
 			'as' 	=> 'dboard',
 			'uses'	=> 'AdminController@dashboard'
-		));
-
-		// List of Products
-		Route::get('products', array(
-			'as' 	=> 'list-products',
-			'uses'	=> 'AdminController@products'
-		));
-
-		// List of Brands
-		Route::get('brands', array(
-			'as' 	=> 'list-brands',
-			'uses'	=> 'AdminController@brands'
 		));
 
 		// Sign Out
