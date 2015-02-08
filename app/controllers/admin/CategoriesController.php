@@ -35,10 +35,11 @@ class CategoriesController extends BaseController
 	}
 
 	public function updateCategory()
-	{
+	{	
+		$main_cat = Input::get('main_category');
 		$cat = Category::find(Input::get('id'));
 		$cat->category = Input::get('category');
-		$cat->main_category = Input::get('main_category');
+		$cat->main_category = ($main_cat == "null") ? null : $main_cat;
 		$cat->save();
 		return 	Redirect::route('list-categories')
 				->with('message', 'Category Successfully Updated');
