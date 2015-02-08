@@ -136,7 +136,7 @@
 										<option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
 											@foreach ($categories as $sub_cat)
 												@if (($sub_cat['main_category'] == $category['id']) && ($sub_cat['main_category'] != null))
-													<option value="{{ $category['id'] }}">&emsp;-- {{ $sub_cat['category'] }}</option>
+													<option value="{{ $sub_cat['id'] }}">&emsp;-- {{ $sub_cat['category'] }}</option>
 												@endif
 											@endforeach
 										@endif
