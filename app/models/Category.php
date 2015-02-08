@@ -2,6 +2,6 @@
 
 class Category extends Eloquent {
 
-	protected $fillable = array('category');
+	protected $fillable = array('category', 'main_category');
 
 }

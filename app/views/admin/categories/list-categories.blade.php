@@ -25,6 +25,7 @@
 								</th>
 								<th>ID</th>
 								<th>Category</th>
+								<th>Main Category</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -36,8 +37,9 @@
 								</td>
 								<td>{{ $category['id'] }}</td>
 								<td>{{ $category['category'] }}</td>
+								<td>{{ $category['main_category'] }}</td>
 								<td>
-									<button data-toggle="modal" data-target="#edit_category" rel="{{ URL::route('cat-id', $category['id']) }}" class="btn btn-primary btn-xs edit-view" title="Edit Category"><i class="fa fa-edit"></i></button>
+									<button data-toggle="modal" data-target="#edit_category" rel="{{ URL::route('cat-id', $category['id']) }}" class="btn btn-primary btn-xs edit-view" title="Edit Category" type="button"><i class="fa fa-edit"></i></button>
 									<a class="btn btn-danger btn-xs confirm-delete" href="{{ URL::route('delete-single', $category['id']) }}" title="Delete Category"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>
@@ -59,18 +61,38 @@
 				</div>
 				{{ Form::open(array('url' => URL::route('create-category'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
 					<div class="modal-body">
-						<div class="form-group">
-							<label class="col-md-3 control-label">Category:</label>
-							<div class="col-md-8">
-								<input class="form-control" type="text" name="category[]" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">Category:</label>
-							<div class="col-md-8">
-								<input class="form-control" type="text" name="category[]" />
-							</div>
-						</div>
+						<table class="table table-bordered" id="input-tbl">
+							<thead>
+								<tr>
+									<th>Category</th>
+									<th>Main Category</th>
+									<th style="text-align:center;">
+										<a href="#" class="text-primary" id="btn-add-input"><i class="fa fa-plus"></i></a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input class="form-control" type="text" name="category[]" required /></td>
+									<td>
+										<select class="form-control" name="main_category[]" id="main_cat_val">
+											<option value="null"></option>
+											@foreach ($categories as $category)
+												@if ($category['main_category'] == null)
+												<option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
+													@foreach ($categories as $sub_cat)
+														@if (($sub_cat['main_category'] == $category['id']) && ($sub_cat['main_category'] != null))
+															<option value="{{ $category['id'] }}">&emsp;-- {{ $sub_cat['category'] }}</option>
+														@endif
+													@endforeach
+												@endif
+											@endforeach
+										</select>
+									</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 
 					<div class="modal-footer">
@@ -104,6 +126,24 @@
 								<input class="form-control" type="text" name="category" id="data-cat" required />
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Main Category:</label>
+							<div class="col-md-8">
+								<select class="form-control" name="main_category" id="data-main-cat">
+									<option value="null"></option>
+									@foreach ($categories as $category)
+										@if ($category['main_category'] == null)
+										<option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
+											@foreach ($categories as $sub_cat)
+												@if (($sub_cat['main_category'] == $category['id']) && ($sub_cat['main_category'] != null))
+													<option value="{{ $category['id'] }}">&emsp;-- {{ $sub_cat['category'] }}</option>
+												@endif
+											@endforeach
+										@endif
+									@endforeach
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
@@ -118,51 +158,6 @@
 
 @section('page_scripts')
 
-	<script type="text/javascript">
-		
-		// toggle checkboxes
-		$('#toggle-catids').click(function(){
-			$('.catids').prop('checked', this.checked);
-			getChecked();
-		});
-
-		// View data of selected item using ajax
-		$('.edit-view').click(function() {
-			var link = $(this).attr('rel');
-			$.ajax({
-				url: link,
-				dataType: 'json',
-				type: 'get',
-				success: function(data){
-					$('#data-id').val(data.id);
-					$('#data-cat').val(data.category);
-				}
-			});
-		});
-
-		// Delete Confirmation
-		$('.confirm-delete').click(function(){
-			var con = confirm('Are you sure to delete record?');
-			return con;
-		});
-
-		// Form Delete Confirmation
-		$('.form-delete-confirm').submit(function(){
-			var con = confirm('You are about to delete record/s?');
-			return con;
-		});
-
-		$('.catids').click(function(){ getChecked(); });
-
-		function getChecked()
-		{
-			var len = $('.catids:checked').length;
-			if (len > 0)
-				$('#multi-delete').prop('disabled', false);
-			else
-				$('#multi-delete').prop('disabled', true);
-		}
-
-	</script>
+	{{ HTML::script('js/categories.js') }}
 
 @stop() <!-- END page_scripts -->

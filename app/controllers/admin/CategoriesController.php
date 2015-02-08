@@ -12,12 +12,15 @@ class CategoriesController extends BaseController
 	public function newCategory()
 	{
 		$cat = Input::get('category');
-
+		$main_cat = Input::get('main_category');
 		$loop = count($cat) - 1;
+		print_r(Input::all());
 		for ($i = 0; $i <= $loop; $i++)
 		{
+			$main_category = ($main_cat[$i] == "null") ? null : $main_cat[$i];
 			$category = Category::create(array(
-				'category' => $cat[$i]
+				'category' 		=> $cat[$i],
+				'main_category' => $main_category
 			));
 			if ($category && $i == $loop)
 				return 	Redirect::route('list-categories')
@@ -35,6 +38,7 @@ class CategoriesController extends BaseController
 	{
 		$cat = Category::find(Input::get('id'));
 		$cat->category = Input::get('category');
+		$cat->main_category = Input::get('main_category');
 		$cat->save();
 		return 	Redirect::route('list-categories')
 				->with('message', 'Category Successfully Updated');
