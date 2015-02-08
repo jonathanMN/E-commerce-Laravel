@@ -59,7 +59,7 @@
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<h4 class="modal-title" id="myModalLabel">Add Category</h4>
 				</div>
-				{{ Form::open(array('url' => URL::route('create-category'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+				{{ Form::open(array('url' => URL::route('create-category'), 'method' => 'POST')) }}
 					<div class="modal-body">
 						<table class="table table-bordered" id="input-tbl">
 							<thead>
@@ -112,7 +112,7 @@
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<h4 class="modal-title" id="myModalLabel">Edit Category</h4>
 				</div>
-				{{ Form::open(array('url' => URL::route('update-category'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+				{{ Form::open(array('url' => URL::route('update-category'), 'method' => 'POST')) }}
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="col-md-3 control-label">ID:</label>
