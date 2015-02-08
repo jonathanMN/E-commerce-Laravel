@@ -158,6 +158,7 @@
 
 @section('page_scripts')
 
+	{{ HTML::script('js/admin.js') }}
 	{{ HTML::script('js/admin/categories.js') }}
 
 @stop() <!-- END page_scripts -->
