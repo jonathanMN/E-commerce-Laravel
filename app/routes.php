@@ -156,6 +156,14 @@ Route::group(array('prefix' => 'site-admin'), function(){
 				'as' 	=> 'list-products',
 				'uses'	=> 'ProductsController@products'
 			));
+
+			Route::group(array('before' => 'csrf'), function(){
+				// Add Product
+				Route::post('create', array(
+					'as' 	=> 'create-product',
+					'uses' 	=> 'ProductsController@addProduct'
+				));
+			});
 		});
 
 		// Dashboard
