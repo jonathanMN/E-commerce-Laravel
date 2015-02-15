@@ -14,7 +14,7 @@ class ProductsController extends BaseController
 	public function addProduct()
 	{
 		$image = Input::file('image')->getClientOriginalName();
-		$destinationPath = 'images/';
+		$destinationPath = 'images/products/';
 		$prod = Product::create(array(
 			'category_id' 	=> Input::get('category'),
 			'brand_id' 		=> Input::get('brand'),
