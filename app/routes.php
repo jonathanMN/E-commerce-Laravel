@@ -157,11 +157,35 @@ Route::group(array('prefix' => 'site-admin'), function(){
 				'uses'	=> 'ProductsController@products'
 			));
 
+			// View Selected product
+			Route::get('edit/{id}', array(
+				'as' 	=> 'product-view',
+				'uses' 	=> 'ProductsController@editView'
+			));
+
+			// Delete Product
+			Route::get('delete/{id}', array(
+				'as' 	=> 'delete-single-product',
+				'uses' 	=> 'ProductsController@deleteProduct1'
+			));
+
 			Route::group(array('before' => 'csrf'), function(){
 				// Add Product
 				Route::post('create', array(
 					'as' 	=> 'create-product',
 					'uses' 	=> 'ProductsController@addProduct'
+				));
+
+				// Update Product
+				Route::post('update', array(
+					'as' 	=> 'update-product',
+					'uses' 	=> 'ProductsController@updateProduct'
+				));
+
+				// Delete Multiple Products
+				Route::post('multi-delete', array(
+					'as' 	=> 'multi-delete-product',
+					'uses' 	=> 'ProductsController@deleteProduct2'
 				));
 			});
 		});
