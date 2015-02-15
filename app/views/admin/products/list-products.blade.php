@@ -17,7 +17,7 @@
 						<thead>
 							<tr>
 								<th style="text-align:center;width:5%;"><input type="checkbox" id="toggle-checks"></th>
-								<th>Name</th>
+								<th>Product</th>
 								<th>Category</th>
 								<th>Brand</th>
 								<th>Qty</th>

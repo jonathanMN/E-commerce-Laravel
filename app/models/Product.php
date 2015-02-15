@@ -22,7 +22,9 @@ class Product extends Eloquent
 			WHERE
 				p.category_id = c.id
 				AND
-				p.brand_id = b.id');
+				p.brand_id = b.id
+			ORDER BY
+				p.id DESC');
 		return $q;
 	}
 
