@@ -35,16 +35,23 @@ Route::group(array('prefix' => 'site-admin'), function(){
 		 * FOR USERS
 		 */
 		Route::group(array('prefix' => 'users'), function(){
-			// Create new User Page
-			Route::get('add-users', array(
-				'as' 	=> 'add-users',
-				'uses'	=> 'AdminController@addUsers'
-			));
 
 			// List of Users
 			Route::get('list', array(
 				'as' 	=> 'list-users',
 				'uses'	=> 'AdminController@users'
+			));
+
+			// View Selected to edit
+			Route::get('view/{id}', array(
+				'as' 	=> 'user-view',
+				'uses' 	=> 'AdminController@editView'
+			));
+
+			// Single Delete
+			Route::get('delete-single/{id}', array(
+				'as' 	=> 'delete-single-user',
+				'uses'	=> 'AdminController@deleteUser1'
 			));
 
 			// cross-site request forgery (CSRF) protection group
@@ -54,6 +61,12 @@ Route::group(array('prefix' => 'site-admin'), function(){
 				Route::post('create', array(
 					'as' 	=> 'account-create-post',
 					'uses' 	=> 'AdminController@userCreate'
+				));
+
+				// Multi Delete
+				Route::post('delete-multi', array(
+					'as' 	=> 'multi-delete-user',
+					'uses'	=> 'AdminController@deleteUser2'
 				));
 			});
 		});

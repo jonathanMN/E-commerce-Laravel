@@ -45,7 +45,7 @@
 				{{ Form::close(); }}
 			</div><!-- /.panel-body -->
 		</div><!-- /.panel -->
-	</div><!-- col-md-6 -->
+	</div><!-- col-md-12 -->
 
 	<!-- Add Product Modal -->
 	<div class="modal fade" id="product_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

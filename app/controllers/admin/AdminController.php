@@ -14,7 +14,8 @@ class AdminController extends BaseController {
 
 	public function users()
 	{
-		return View::make('admin.users.list-users');
+		return 	View::make('admin.users.list-users')
+				->with('users', User::all());
 	}
 
 	public function userSignout()
@@ -28,15 +29,13 @@ class AdminController extends BaseController {
 		$validator = Validator::make(Input::all(), array(
 			'username' 		=> 'required|max:25|min:3|unique:users',
 			'password' 		=> 'required|min:6',
-			're-password' 	=> 'required|same:password',
+			're_password' 	=> 'required|same:password',
 			'email' 		=> 'required|email|unique:users'
 		));
 
 		if ($validator->fails())
 		{
-			return 	Redirect::route('add-users')
-					->withErrors($validator)
-					->withInput();
+			return 	$validator->errors();
 		}
 		else
 		{
@@ -48,9 +47,35 @@ class AdminController extends BaseController {
 
 			if ($user)
 			{
-				return 	Redirect::route('add-users')
-						->with('message', 'Account Created');
+				return 	array('success' => true);
 			}
+		}
+	}
+
+	public function editView($id)
+	{
+		return json_encode(User::find($id));
+	}
+
+	public function deleteUser1($id)
+	{
+		$id = User::find($id);
+		$id->delete();
+		return 	Redirect::route('list-users')
+				->with('message', 'Record Deleted');
+	}
+
+	public function deleteUser2()
+	{
+		$id = Input::get('u_id');
+		$loop = count($id) - 1;
+		for ($i = 0; $i <= $loop; $i++)
+		{
+			$u = User::find($id[$i]);
+			$u->delete();
+			if ($u && $i == $loop)
+				return 	Redirect::route('list-users')
+						->with('message', 'Record/s Deleted');
 		}
 	}
 
