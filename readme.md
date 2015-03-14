@@ -1,8 +1,13 @@
-####Database Info
+Database Info
+-------
 * Database name : laravel_ecw
 * Migrating db tables : 'cd' to 'root folder' then run 'php artisan migrate'
-####Admin Page
+
+Admin Page
+-------
 * /site-admin
-####User
+
+User
+-------
 * username : atan
 * password : 123456
