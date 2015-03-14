@@ -28,4 +28,9 @@ class Product extends Eloquent
 		return $q;
 	}
 
+	public static function productMax()
+	{
+		return DB::table('products')->max('id');
+	}
+
 }

@@ -13,18 +13,19 @@ class ProductsController extends BaseController
 
 	public function addProduct()
 	{
-		$image = Input::file('image')->getClientOriginalName();
+		$image = explode('.', Input::file('image')->getClientOriginalName());
+		$new_img_name = productMax().'.'.$image[1];
 		$destinationPath = 'images/products/';
 		$prod = Product::create(array(
 			'category_id' 	=> Input::get('category'),
 			'brand_id' 		=> Input::get('brand'),
 			'name' 			=> Input::get('product'),
 			'description' 	=> Input::get('description'),
-			'image' 		=> $image,
+			'image' 		=> $new_img_name,
 			'quantity' 		=> Input::get('quantity'),
 			'unit_cost' 	=> Input::get('unit_cost')
 		));
-		Input::file('image')->move($destinationPath, $image);
+		Input::file('image')->move($destinationPath, $new_img_name);
 
 		if ($prod)
 			return 	Redirect::route('list-products')
@@ -48,6 +49,22 @@ class ProductsController extends BaseController
 		$product->save();
 		return 	Redirect::route('list-products')
 				->with('message', 'Product Update.');
+	}
+
+	public function changeProductImg()
+	{
+		$id = Input::get('img_id');
+		$image = explode('.', Input::file('image')->getClientOriginalName());
+		$new_img_name = $id.'.'.$image[1];
+		$destinationPath = 'images/products/';
+
+		$product = Product::find($id);
+		$product->image = $new_img_name;
+		$product->save();
+
+		Input::file('image')->move($destinationPath, $new_img_name);
+
+		return json_encode(array('success' => 'true'));
 	}
 
 	public function deleteProduct1($id)

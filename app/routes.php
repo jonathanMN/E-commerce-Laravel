@@ -11,9 +11,20 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+/* View products client side */
+Route::get('/', array(
+	'as' 	=> 'client-products-page',
+	'uses' 	=> 'FrontEndController@viewProducts'
+));
+
+/* Cart Routes */
+Route::group(array('before' => 'csrf'), function(){
+	// Add Product/s to cart
+	Route::post('add-to-cart', array(
+		'as' 	=> 'add-cart',
+		'uses'	=> 'CartController@addUpdateCart'
+	));
+
 });
 
 Route::group(array('prefix' => 'site-admin'), function(){
@@ -25,6 +36,24 @@ Route::group(array('prefix' => 'site-admin'), function(){
 		'as'	=> 'admin-login',
 		'uses'	=> 'LoginController@loginPage'
 	));
+
+	/**
+	 * Unauthenticated group
+	 */
+	Route::group(array('before' => 'guest'), function(){
+
+		// cross-site request forgery (CSRF) protection group
+		Route::group(array('before' => 'csrf'), function(){
+
+			//Sign in (POST)
+			Route::post('sign-in', array(
+				'as' 	=> 'user-sign-in',
+				'uses'	=> 'LoginController@userSignin'
+			));
+
+		});
+
+	});
 
 	/**
 	 * Authenticated group
@@ -195,6 +224,11 @@ Route::group(array('prefix' => 'site-admin'), function(){
 					'uses' 	=> 'ProductsController@updateProduct'
 				));
 
+				Route::post('change-image', array(
+					'as' 	=> 'change-product-image',
+					'uses' 	=> 'ProductsController@changeProductImg'
+				));
+
 				// Delete Multiple Products
 				Route::post('multi-delete', array(
 					'as' 	=> 'multi-delete-product',
@@ -217,22 +251,6 @@ Route::group(array('prefix' => 'site-admin'), function(){
 
 	});
 
-	/**
-	 * Unauthenticated group
-	 */
-	Route::group(array('before' => 'guest'), function(){
 
-		// cross-site request forgery (CSRF) protection group
-		Route::group(array('before' => 'csrf'), function(){
-
-			//Sign in (POST)
-			Route::post('sign-in', array(
-				'as' 	=> 'user-sign-in',
-				'uses'	=> 'LoginController@userSignin'
-			));
-
-		});
-
-	});
 
 }); /* <-- site-admin */

@@ -35,7 +35,7 @@
 								<td>{{ $product->quantity }}</td>
 								<td>{{ $product->unit_cost }}</td>
 								<td>
-									<button type="button" class="btn btn-primary btn-xs edit-product" data-toggle="modal" type="button" data-target="#edit_product_modal" rel="{{ URL::route('product-view', $product->id) }}" title="Edit Category"><i class="fa fa-edit"></i></button>
+									<button type="button" class="btn btn-primary btn-xs edit-product" data-toggle="modal" data-target="#edit_product_modal" rel="{{ URL::route('product-view', $product->id) }}" title="Edit Category"><i class="fa fa-edit"></i></button>
 									<a href="{{ URL::route('delete-single-product', $product->id) }}" class="btn btn-danger btn-xs confirm-delete" title="Delete Category"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>
@@ -106,7 +106,8 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Image :</label>
 							<div class="col-md-9">
-								<input type="file" class="form-control" name="image" />
+								<input type="file" class="form-control" name="image" id="input_img" />
+								<img src=""  id="preview" style="display:none;width:300px;" />
 							</div>
 						</div>
 					</div>
@@ -180,12 +181,52 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Image :</label>
-							<div class="col-md-9">
-								<input type="file" class="form-control" name="image" />
+							<div class="col-md-9">						
+								<img src="" alt="" rel="{{ URL::to('/') }}" style="width:300px" id="data-image" />
+								<p>
+									<a type="button" rel="" id="change_img_link" href="#" data-toggle="modal" data-target="#change_img" title="Edit Category">
+										<i class="fa fa-picture-o"></i> Change Image
+									</a>
+								</p>
 							</div>
 						</div>
 					</div>
 
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+					</div>
+				{{ Form::close() }}
+			</div>
+		</div>
+	</div>
+	<!-- END Edit Brands Modal -->
+
+	<!-- Edit Product Modal -->
+	<div class="modal fade" id="change_img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Change Image</h4>
+				</div>
+				{{ Form::open(array('url' => URL::route('change-product-image'), 'files' => true, 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'change_img_form')) }}
+					<input type="hidden" name="id" id="data-id" />
+					<div class="modal-body">
+						<input type="hidden" name="img_id" id="data-img-id" />
+						<div class="form-group">
+							<label class="col-md-3 control-label">File :</label>
+							<div class="col-md-9">
+								<input type="file" class="form-control" name="image" id="input_img_edit" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Image :</label>
+							<div class="col-md-9">
+								<img src="" alt="" style="width:300px" id="preview_edit" />
+							</div>
+						</div>
+					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
